@@ -1,0 +1,841 @@
+==11067== Memcheck, a memory error detector
+==11067== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==11067== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==11067== Command: ./pa05 i inputs/intinput0 outputs/intoutput0
+==11067== Parent PID: 11064
+==11067== 
+--11067-- 
+--11067-- Valgrind options:
+--11067--    --tool=memcheck
+--11067--    --leak-check=full
+--11067--    --verbose
+--11067--    --log-file=outputs/intmemoutput0
+--11067-- Contents of /proc/version:
+--11067--   Linux version 2.6.32-358.18.1.el6.x86_64 (mockbuild@x86-003.build.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-3) (GCC) ) #1 SMP Fri Aug 2 17:04:38 EDT 2013
+--11067-- Arch and hwcaps: AMD64, amd64-sse3-cx16
+--11067-- Page sizes: currently 4096, max supported 4096
+--11067-- Valgrind library directory: /usr/lib64/valgrind
+--11067-- Reading syms from /home/shay/a/mdholaki/ECE264/solutions/ECE264Solutions/PA05/pa05
+--11067-- Reading syms from /usr/lib64/valgrind/memcheck-amd64-linux
+--11067--    object doesn't have a dynamic symbol table
+--11067-- Reading syms from /lib64/ld-2.12.so
+--11067-- Scheduler: using generic scheduler lock implementation.
+--11067-- Reading suppressions file: /usr/lib64/valgrind/default.supp
+==11067== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-11067-by-mdholaki-on-ecelinux32.ecn.purdue.edu
+==11067== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-11067-by-mdholaki-on-ecelinux32.ecn.purdue.edu
+==11067== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-11067-by-mdholaki-on-ecelinux32.ecn.purdue.edu
+==11067== 
+==11067== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==11067== don't want to do, unless you know exactly what you're doing,
+==11067== or are doing some strange experiment):
+==11067==   /usr/lib64/valgrind/../../bin/vgdb --pid=11067 ...command...
+==11067== 
+==11067== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==11067==   /path/to/gdb ./pa05
+==11067== and then give GDB the following command
+==11067==   target remote | /usr/lib64/valgrind/../../bin/vgdb --pid=11067
+==11067== --pid is optional if only one valgrind process is running
+==11067== 
+--11067-- REDIR: 0x314f817520 (strlen) redirected to 0x38049551 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--11067-- Reading syms from /usr/lib64/valgrind/vgpreload_core-amd64-linux.so
+--11067-- Reading syms from /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so
+--11067-- REDIR: 0x314f817390 (index) redirected to 0x4a07bf0 (index)
+--11067-- REDIR: 0x314f817410 (strcmp) redirected to 0x4a08530 (strcmp)
+--11067-- Reading syms from /lib64/libc-2.12.so
+--11067-- REDIR: 0x314fc84ec0 (strcasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--11067-- REDIR: 0x314fc87180 (strncasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--11067-- REDIR: 0x314fc82e30 (__GI_strrchr) redirected to 0x4a07a70 (__GI_strrchr)
+--11067-- REDIR: 0x314fc7f8d0 (strcmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--11067-- REDIR: 0x314fd27ac0 (__strcmp_sse42) redirected to 0x4a08490 (strcmp)
+--11067-- REDIR: 0x314fc7a8e0 (malloc) redirected to 0x4a0696c (malloc)
+--11067-- REDIR: 0x314fc7b710 (free) redirected to 0x4a06369 (free)
+--11067-- REDIR: 0x314fc8ace0 (strchrnul) redirected to 0x4a09f10 (strchrnul)
+--11067-- REDIR: 0x314fc89860 (memcpy) redirected to 0x4a08b20 (memcpy)
+==11067== Invalid read of size 4
+==11067==    at 0x400D5D: CompInt (answer05.c:358)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D66: CompInt (answer05.c:359)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d8 is 4 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid write of size 2
+==11067==    at 0x4A08C4C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D5D: CompInt (answer05.c:358)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382e0 is 12 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D66: CompInt (answer05.c:359)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382e4 is 16 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382e0 is 12 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid write of size 2
+==11067==    at 0x4A08C4C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382e0 is 12 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382dc is 8 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid write of size 2
+==11067==    at 0x4A08C4C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382dc is 8 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D5D: CompInt (answer05.c:358)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D66: CompInt (answer05.c:359)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382dc is 8 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid write of size 2
+==11067==    at 0x4A08C4C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D66: CompInt (answer05.c:359)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BD0: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d0 is 16 bytes inside a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D5D: CompInt (answer05.c:358)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382e8 is 20 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382e8 is 20 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid write of size 2
+==11067==    at 0x4A08C4C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382e8 is 20 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382f0 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 2
+==11067==    at 0x4A08C4C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382f0 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382e8 is 20 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382fc is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 2
+==11067==    at 0x4A08C4C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382fc is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BD0: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c3830c is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 2
+==11067==    at 0x4A08D6C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34C3B: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c3830a is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38308 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BD0: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38304 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BD0: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382fc is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382e8 is 20 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BD0: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382e8 is 20 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d0 is 16 bytes inside a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid write of size 2
+==11067==    at 0x4A08C4C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38300 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38310 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 2
+==11067==    at 0x4A08C4C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38310 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38310 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38338 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38338 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38310 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38310 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D66: CompInt (answer05.c:359)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38310 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D5D: CompInt (answer05.c:358)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BD0: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38310 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 8
+==11067==    at 0x4A08D0C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34C3B: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38308 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d0 is 16 bytes inside a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38388 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38360 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B77: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38360 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c383b0 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c383b0 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D5D: CompInt (answer05.c:358)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38360 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D66: CompInt (answer05.c:359)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c383b0 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38360 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34B87: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38360 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D66: CompInt (answer05.c:359)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38360 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x400D5D: CompInt (answer05.c:358)
+==11067==    by 0x314FC34BFA: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BFF: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d4 is 0 bytes after a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+==11067== Invalid read of size 4
+==11067==    at 0x314FC34BD0: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38360 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid read of size 8
+==11067==    at 0x4A08D0C: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC34C3B: msort_with_tmp (in /lib64/libc-2.12.so)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c38358 is not stack'd, malloc'd or (recently) free'd
+==11067== 
+==11067== Invalid write of size 8
+==11067==    at 0x4A08BF3: memcpy (mc_replace_strmem.c:882)
+==11067==    by 0x314FC351DB: qsort_r (in /lib64/libc-2.12.so)
+==11067==    by 0x400D3A: sortInteger (answer05.c:351)
+==11067==    by 0x400EC4: main (pa05.c:26)
+==11067==  Address 0x4c382d0 is 16 bytes inside a block of size 20 alloc'd
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x400936: readInteger (answer05.c:89)
+==11067==    by 0x400E8D: main (pa05.c:20)
+==11067== 
+
+valgrind: m_mallocfree.c:268 (mk_plain_bszB): Assertion 'bszB != 0' failed.
+valgrind: This is probably caused by your program erroneously writing past the
+end of a heap block and corrupting heap metadata.  If you fix any
+invalid writes reported by Memcheck, this assertion failure will
+probably go away.  Please try that before reporting this as a bug.
+
+==11067==    at 0x38031DA7: report_and_quit (m_libcassert.c:235)
+==11067==    by 0x38031FE0: vgPlain_assert_fail (m_libcassert.c:309)
+==11067==    by 0x3803F263: vgPlain_arena_malloc (m_mallocfree.c:268)
+==11067==    by 0x38003C34: vgMemCheck_new_block (mc_malloc_wrappers.c:263)
+==11067==    by 0x3800409A: vgMemCheck_malloc (mc_malloc_wrappers.c:301)
+==11067==    by 0x3807A58A: vgPlain_scheduler (scheduler.c:1665)
+==11067==    by 0x380A5A19: run_a_thread_NORETURN (syswrap-linux.c:103)
+
+sched status:
+  running_tid=1
+
+Thread 1: status = VgTs_Runnable
+==11067==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11067==    by 0x314FC6718A: __fopen_internal (in /lib64/libc-2.12.so)
+==11067==    by 0x400C20: saveInteger (answer05.c:286)
+==11067==    by 0x400EF2: main (pa05.c:28)
+
+
+Note: see also the FAQ in the source distribution.
+It contains workarounds to several common problems.
+In particular, if Valgrind aborted or crashed after
+identifying problems in your program, there's a good chance
+that fixing those problems will prevent Valgrind aborting or
+crashing, especially if it happened in m_mallocfree.c.
+
+If that doesn't help, please report this bug to: www.valgrind.org
+
+In the bug report, send all the above text, the valgrind
+version, and what OS and version you are using.  Thanks.
+
