@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pa05.h"
-#define MAXIMUM_LENGTH 80
+#define MAXIMUM_LENGTH 180
 int CompInt(const void * p1, const void * p2);
 int compstr(const void * p1, const void * p2);
 
@@ -65,42 +65,36 @@ int compstr(const void * p1, const void * p2);
 
 int * readInteger(char * filename, int * numInteger)
 {
-  FILE *fp;
+  FILE * fptr;
   int count = 0;
-  int value = 0;
+  int val;
+  int * Intarr;
   int i = 0;
-  int * array = NULL;
-  
-  fp = fopen(filename, "r");
-  
-  if (fp == NULL)
-  {
-    return NULL;
-  }
-  
-  else if (fp != NULL)
-  {
-    while(fscanf(fp, "%d", &value) != EOF)
+
+  fptr = fopen(filename, "r");
+  if (fptr == NULL)
+    {
+      return NULL;
+    }
+ 
+  while(fscanf(fptr, "%d", & val) == 1)
     {
       count++;
     }
-    (*numInteger) = count;
-    
-    array = malloc(sizeof(int) * count);
-    fseek(fp, 0, SEEK_SET);
-    
-    for(i = 0; (fscanf(fp, "%d",&array[i])) != EOF; i++)
+  
+  *numInteger = count;
+ 
+  Intarr  = malloc(sizeof(int) * count);
+  fseek(fptr, 0, SEEK_SET);
+  
+  while(fscanf(fptr, "%d", & val) == 1)
     {
-    }
-    /*while(fscanf(fp, "%d", &value) != EOF);
-    {
-      array[i] = value;
+      Intarr[i] = val;
       i++;
-    }*/
-    
-    fclose(fp);
-  }
-  return (array);
+    }
+
+  fclose(fptr);
+  return Intarr;
 }
 
 /* ----------------------------------------------- */
@@ -194,8 +188,8 @@ char * * readString(char * filename, int * numString)
     
     fseek(fptr, 0, SEEK_SET);
 
-    strArr = malloc(sizeof(char *) * count);
-       
+    strArr = malloc(sizeof(char *) * count); 
+
     while (fgets(buf,MAXIMUM_LENGTH, fptr) != NULL)
     {
       strArr[i] = malloc(sizeof(char*) * (strlen(buf) + 1));
@@ -233,6 +227,11 @@ void printString(char * * arrString, int numString)
     for(j = 0; j < numString; j++)
     {
       printf("%s", arrString[j]);
+      int len = strlen(arrString[j]);
+      if (len == 0 || arrString[j][len-1] != '\n')
+	{
+	  printf("\n");
+	}
     }
 }
 
@@ -257,9 +256,9 @@ void freeString(char * * arrString, int numString)
  
  for(i = 0; i < numString; i++)
  {
-   free(&arrString[i]);
+   free(arrString[i]);
  }
- free(&arrString[i]);
+ free(arrString);
 }
 
 /* ----------------------------------------------- */
@@ -282,23 +281,23 @@ void freeString(char * * arrString, int numString)
 
 int saveInteger(char * filename, int * arrInteger, int numInteger)
 {
- FILE *fp;
- fp = fopen(filename, "w");
+  FILE * fptr;
+ fptr = fopen(filename, "w");
  int i = 0;
  
-  if (fp == NULL)
+  if (fptr == NULL)
   {
     return 0;
   }
     
   for(i = 0; i < numInteger; i++)
   {
-    fprintf(fp, "%d\n", arrInteger[i]);
+    fprintf(fptr, "%d\n", arrInteger[i]);
   }
-  fclose(fp);
+  fclose(fptr);
   
   return 1;
-}
+  } 
 
 /* ----------------------------------------------- */
 /*
@@ -320,20 +319,25 @@ int saveInteger(char * filename, int * arrInteger, int numInteger)
 
 int saveString(char * filename, char * * arrString, int numString)
 {
-  FILE * fp;
-  fp = fopen(filename, "w");
+  FILE * fptr;
+  fptr = fopen(filename, "w");
   int i = 0;
   
-  if (fp == NULL)
+  if (fptr == NULL)
   {
     return 0;
   }
 
   for(i = 0; i < numString; i++)
     {
-     fprintf(fp, "%s", arrString[i]);
+     fprintf(fptr, "%s", arrString[i]);
+      int len = strlen(arrString[i]);
+      if (len == 0 || arrString[i][len-1] != '\n')
+	{
+	  fprintf(fptr,"\n");
+	}
     }
-  fclose(fp);
+  fclose(fptr);
 
   return 1;
 }
@@ -346,29 +350,30 @@ int saveString(char * filename, char * * arrString, int numString)
  *
  */
 
-void sortInteger(int * arrInteger, int numInteger)
-{
- qsort(arrInteger, MAXIMUM_LENGTH, sizeof(int), CompInt);
-}
-
 int CompInt(const void * p1, const void * p2)
 {
   int * intp1 = (int *) p1;
   int * intp2 = (int *) p2;
-  int v1 = * intp1;
-  int v2 = * intp2;
+  int intv1 = * intp1;
+  int intv2 = * intp2;
   
-  if (v1 < v2)
+  if (intv1 < intv2)
   {
     return -1;
   }
   
-  if (v1 == v2)
+  else if (intv1 == intv2)
   {
     return 0;
   }
   
   return 1;
+}
+
+
+void sortInteger(int * arrInteger, int numInteger)
+{
+ qsort(arrInteger, numInteger, sizeof(int), CompInt);
 }
 
 
@@ -393,9 +398,9 @@ int compstr(const void * p1, const void * p2)
  
   char* * intp1 = (char * *) p1;
   char* * intp2 = (char * *) p2;
-  char* v1 = * intp1;
-  char * v2 = * intp2;
-  return (compstr(v1,v2));
+  char* intv1 = * intp1;
+  char* intv2 = * intp2;
+  return (strcmp(intv1,intv2));
 }
 
 
