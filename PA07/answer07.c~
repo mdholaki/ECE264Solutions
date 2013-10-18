@@ -35,6 +35,14 @@ void List_print(FILE * out, Node * head)
  */
 void List_destroy(Node * head)
 {
+  if (fr == NULL)
+  {
+    return;
+  }
+  List_destroy(head -> next);
+  free(head);
+  
+  return;
 
 }
 
@@ -53,8 +61,11 @@ void List_destroy(Node * head)
  */
 Node * List_create(int value, int index)
 {
-
-    return NULL;
+  Node * nd = malloc(sizeof(Node));
+  nd -> next = NULL;
+  nd -> value = value; 
+  nd -> index = index;
+  return nd;
 }
 
 /**
@@ -85,7 +96,30 @@ Node * List_create(int value, int index)
  */
 Node * List_build(int * value, int * index, int length)
 {
-    return NULL;
+  Node * head = NULL;
+  int i = 0;
+  int j = 0;
+  length_real = length - 1;
+  
+  for (i = (length_real); i > 0; i--)
+  {
+    if(index[i -1] == index[i])
+    {
+      value[i - 1] = (value[i-1] + value[i]);
+      value[i] = 0;
+    }
+  }
+  
+  while (j < length)
+  {
+    if (value[j] != 0)
+    {
+      head = List_insert_ascend(head, index[j], value[j]);
+    }
+    j++;
+  }
+  
+  return head;
 }
 
 
@@ -110,6 +144,14 @@ Node * List_build(int * value, int * index, int length)
  */
 Node * List_insert_ascend(Node * head, int value, int index)
 {
+  Node * new_insert;
+  new_insert = List_create(value, index);
+  
+  
+  
+  
+    
+  
     return NULL;
 }
 

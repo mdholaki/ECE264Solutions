@@ -96,8 +96,32 @@ Node * List_create(int value, int index)
  */
 Node * List_build(int * value, int * index, int length)
 {
+  Node * head = NULL;
+  int i = 0;
+  int j = 0;
+  int length_real = 0;
   
-    return NULL;
+  length_real = length - 1;
+  
+  for (i = (length_real); i > 0; i--)
+  {
+    if(index[i -1] == index[i])
+    {
+      value[i - 1] = (value[i-1] + value[i]);
+      value[i] = 0;
+    }
+  }
+  
+  while (j < length)
+  {
+    if (value[j] != 0)
+    {
+      head = List_insert_ascend(head, index[j], value[j]);
+    }
+    j++;
+  }
+  
+  return head;
 }
 
 
@@ -122,7 +146,25 @@ Node * List_build(int * value, int * index, int length)
  */
 Node * List_insert_ascend(Node * head, int value, int index)
 {
-    return NULL;
+  Node * new_insert;
+  new_insert = List_create(value, index);
+  
+  if (head == NULL)
+  {
+    return new_insert;
+  }
+  
+  if (head -> index < new_insert -> index)
+  {
+    head -> next = new_insert;
+    return head;
+  }
+  
+  if ((head -> index) > (new_insert -> index))
+  {
+    new_insert -> next = head;
+    return new_insert
+  }
 }
 
 
@@ -138,7 +180,18 @@ Node * List_insert_ascend(Node * head, int value, int index)
  */
 Node * List_delete(Node * head, int index)
 {
-    return NULL;
+  Node * New_delete;
+  Node * p;
+  p = head;
+  Node * q;
+  q = p -> next;
+  
+    
+    
+  
+  
+  
+  
 }
 
 /**
