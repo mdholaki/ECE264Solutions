@@ -45,8 +45,8 @@ ${TESTS}: test%: $(TARGET) | environment
 	@./bin/test.sh "$(TARGET)" $*
 
 test0: pa07
-	$(VALGRIND) --log-file = outputs/output0 ./pa07 inputs/input0_A inputs/input0_B
+	$(VALGRIND) --log-file=outputs/output0 ./pa07 inputs/input0_A inputs/input0_B
 	diff -w outputs/output0 expected/expected0
 test1: pa07
-	$(VALGRIND) --log-file = outputs/output01 ./pa07 inputs/input1_A inputs/input1_B
+	$(VALGRIND) --log-file=outputs/output01 ./pa07 inputs/input1_A inputs/input1_B
 	diff -w outputs/output1 expected/expected1

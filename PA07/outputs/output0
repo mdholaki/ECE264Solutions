@@ -1,0 +1,147 @@
+==11826== Memcheck, a memory error detector
+==11826== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==11826== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==11826== Command: ./pa07 inputs/input0_A inputs/input0_B
+==11826== Parent PID: 10462
+==11826== 
+--11826-- 
+--11826-- Valgrind options:
+--11826--    --leak-check=full
+--11826--    --verbose
+--11826--    --log-file=outputs/output0
+--11826-- Contents of /proc/version:
+--11826--   Linux version 2.6.32-358.23.2.el6.x86_64 (mockbuild@x86-022.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-3) (GCC) ) #1 SMP Sat Sep 14 05:32:37 EDT 2013
+--11826-- Arch and hwcaps: AMD64, amd64-sse3-cx16
+--11826-- Page sizes: currently 4096, max supported 4096
+--11826-- Valgrind library directory: /usr/lib64/valgrind
+--11826-- Reading syms from /home/shay/a/mdholaki/ECE264/solutions/ECE264Solutions/PA07/pa07
+--11826-- Reading syms from /usr/lib64/valgrind/memcheck-amd64-linux
+--11826--    object doesn't have a dynamic symbol table
+--11826-- Reading syms from /lib64/ld-2.12.so
+--11826-- Scheduler: using generic scheduler lock implementation.
+--11826-- Reading suppressions file: /usr/lib64/valgrind/default.supp
+==11826== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-11826-by-mdholaki-on-ecelinux09.ecn.purdue.edu
+==11826== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-11826-by-mdholaki-on-ecelinux09.ecn.purdue.edu
+==11826== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-11826-by-mdholaki-on-ecelinux09.ecn.purdue.edu
+==11826== 
+==11826== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==11826== don't want to do, unless you know exactly what you're doing,
+==11826== or are doing some strange experiment):
+==11826==   /usr/lib64/valgrind/../../bin/vgdb --pid=11826 ...command...
+==11826== 
+==11826== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==11826==   /path/to/gdb ./pa07
+==11826== and then give GDB the following command
+==11826==   target remote | /usr/lib64/valgrind/../../bin/vgdb --pid=11826
+==11826== --pid is optional if only one valgrind process is running
+==11826== 
+--11826-- REDIR: 0x3089617520 (strlen) redirected to 0x38049551 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--11826-- Reading syms from /usr/lib64/valgrind/vgpreload_core-amd64-linux.so
+--11826-- Reading syms from /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so
+--11826-- REDIR: 0x3089617390 (index) redirected to 0x4a07bf0 (index)
+--11826-- REDIR: 0x3089617410 (strcmp) redirected to 0x4a08530 (strcmp)
+--11826-- Reading syms from /lib64/libc-2.12.so
+--11826-- REDIR: 0x3089a84ec0 (strcasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--11826-- REDIR: 0x3089a87180 (strncasecmp) redirected to 0x480155c (_vgnU_ifunc_wrapper)
+--11826-- REDIR: 0x3089a82e30 (__GI_strrchr) redirected to 0x4a07a70 (__GI_strrchr)
+--11826-- REDIR: 0x3089a7a8e0 (malloc) redirected to 0x4a0696c (malloc)
+--11826-- REDIR: 0x3089a8ace0 (strchrnul) redirected to 0x4a09f10 (strchrnul)
+--11826-- REDIR: 0x3089a7b710 (free) redirected to 0x4a06369 (free)
+--11826-- REDIR: 0x3089a81350 (__GI_strlen) redirected to 0x4a07f70 (__GI_strlen)
+--11826-- REDIR: 0x3089a846f0 (mempcpy) redirected to 0x4a09f80 (mempcpy)
+==11826== Conditional jump or move depends on uninitialised value(s)
+==11826==    at 0x40096C: List_build (answer07.c:110)
+==11826==    by 0x400BF4: List_copy (answer07.c:255)
+==11826==    by 0x401101: main (pa07.c:114)
+==11826== 
+==11826== Conditional jump or move depends on uninitialised value(s)
+==11826==    at 0x4009D7: List_build (answer07.c:119)
+==11826==    by 0x400BF4: List_copy (answer07.c:255)
+==11826==    by 0x401101: main (pa07.c:114)
+==11826== 
+==11826== Conditional jump or move depends on uninitialised value(s)
+==11826==    at 0x40096C: List_build (answer07.c:110)
+==11826==    by 0x400BF4: List_copy (answer07.c:255)
+==11826==    by 0x400CD2: List_merge (answer07.c:312)
+==11826==    by 0x401149: main (pa07.c:121)
+==11826== 
+==11826== Conditional jump or move depends on uninitialised value(s)
+==11826==    at 0x4009D7: List_build (answer07.c:119)
+==11826==    by 0x400BF4: List_copy (answer07.c:255)
+==11826==    by 0x400CD2: List_merge (answer07.c:312)
+==11826==    by 0x401149: main (pa07.c:121)
+==11826== 
+==11826== 
+==11826== Process terminating with default action of signal 2 (SIGINT)
+==11826==    at 0x400D0D: List_merge (answer07.c:322)
+==11826==    by 0x401149: main (pa07.c:121)
+==11826== 
+==11826== HEAP SUMMARY:
+==11826==     in use at exit: 128 bytes in 8 blocks
+==11826==   total heap usage: 18 allocs, 10 frees, 1,344 bytes allocated
+==11826== 
+==11826== Searching for pointers to 8 not-freed blocks
+==11826== Checked 64,528 bytes
+==11826== 
+==11826== 16 bytes in 1 blocks are definitely lost in loss record 3 of 6
+==11826==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11826==    by 0x4008C4: List_create (answer07.c:64)
+==11826==    by 0x400A3B: List_insert_ascend (answer07.c:153)
+==11826==    by 0x400A04: List_build (answer07.c:121)
+==11826==    by 0x400F57: readSparseArrayFile (pa07.c:64)
+==11826==    by 0x40101A: main (pa07.c:91)
+==11826== 
+==11826== 16 bytes in 1 blocks are definitely lost in loss record 4 of 6
+==11826==    at 0x4A069EE: malloc (vg_replace_malloc.c:270)
+==11826==    by 0x4008C4: List_create (answer07.c:64)
+==11826==    by 0x400A3B: List_insert_ascend (answer07.c:153)
+==11826==    by 0x400A04: List_build (answer07.c:121)
+==11826==    by 0x400F57: readSparseArrayFile (pa07.c:64)
+==11826==    by 0x40104D: main (pa07.c:92)
+==11826== 
+==11826== LEAK SUMMARY:
+==11826==    definitely lost: 32 bytes in 2 blocks
+==11826==    indirectly lost: 0 bytes in 0 blocks
+==11826==      possibly lost: 0 bytes in 0 blocks
+==11826==    still reachable: 96 bytes in 6 blocks
+==11826==         suppressed: 0 bytes in 0 blocks
+==11826== Reachable blocks (those to which a pointer was found) are not shown.
+==11826== To see them, rerun with: --leak-check=full --show-reachable=yes
+==11826== 
+==11826== Use --track-origins=yes to see where uninitialised values come from
+==11826== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 6 from 6)
+==11826== 
+==11826== 1 errors in context 1 of 6:
+==11826== Conditional jump or move depends on uninitialised value(s)
+==11826==    at 0x4009D7: List_build (answer07.c:119)
+==11826==    by 0x400BF4: List_copy (answer07.c:255)
+==11826==    by 0x400CD2: List_merge (answer07.c:312)
+==11826==    by 0x401149: main (pa07.c:121)
+==11826== 
+==11826== 
+==11826== 1 errors in context 2 of 6:
+==11826== Conditional jump or move depends on uninitialised value(s)
+==11826==    at 0x40096C: List_build (answer07.c:110)
+==11826==    by 0x400BF4: List_copy (answer07.c:255)
+==11826==    by 0x400CD2: List_merge (answer07.c:312)
+==11826==    by 0x401149: main (pa07.c:121)
+==11826== 
+==11826== 
+==11826== 1 errors in context 3 of 6:
+==11826== Conditional jump or move depends on uninitialised value(s)
+==11826==    at 0x4009D7: List_build (answer07.c:119)
+==11826==    by 0x400BF4: List_copy (answer07.c:255)
+==11826==    by 0x401101: main (pa07.c:114)
+==11826== 
+==11826== 
+==11826== 1 errors in context 4 of 6:
+==11826== Conditional jump or move depends on uninitialised value(s)
+==11826==    at 0x40096C: List_build (answer07.c:110)
+==11826==    by 0x400BF4: List_copy (answer07.c:255)
+==11826==    by 0x401101: main (pa07.c:114)
+==11826== 
+--11826-- 
+--11826-- used_suppression:      4 U1004-ARM-_dl_relocate_object
+--11826-- used_suppression:      2 glibc-2.5.x-on-SUSE-10.2-(PPC)-2a
+==11826== 
+==11826== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 6 from 6)

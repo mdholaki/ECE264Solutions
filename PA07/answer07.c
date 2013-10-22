@@ -75,7 +75,8 @@ Node * List_create(int value, int index)
  *
  * Arguments:
  * value    Array of values
- * index    Array of indices
+ * index    Array of fprintf(out, "%5d: %6d\n", head -> index, head -> value);
+	    head = head -> next;indices
  * length   Length of the above arrays
  *
  * Returns:
@@ -119,9 +120,14 @@ Node * List_build(int * value, int * index, int length)
     {
       head = List_insert_ascend(head, value[j], index[j]);
     }
-
     j++;
   }
+  
+  /*while (head != NULL)
+  {
+    printf("Index: %d  Value: %d\n", head -> index, head -> value);
+    head = head -> next;
+  } */
   
   return head;
 }
@@ -158,7 +164,7 @@ Node * List_insert_ascend(Node * head, int value, int index)
   
   if (head -> index < new_insert -> index)
   {
-    head -> next = new_insert;
+    head -> next = List_insert_ascend(head -> next, value, index);
     return head;
   }
   
@@ -181,33 +187,26 @@ Node * List_insert_ascend(Node * head, int value, int index)
  * A sparse array with the node removed (the one with index)
  */
 Node * List_delete(Node * head, int index)
-{
+{ 
   Node * p;
-  p = head;
   
-  if (p == NULL)
+  if (head == NULL)
   {
+    return head;
+  }
+  
+  if (head -> index == index)
+  {
+    printf("Test\n");
+    p = head -> next;
+    free(head);
     return p;
   }
   
-  
-  Node * q;
-  q = p -> next;
-    
-  while ((q != NULL) && ((q -> index) != index))
-  {
-    p = p -> next;
-    q = q -> next;
-  }
-  
-  if (q != NULL)
-  {
-    p -> next = q -> next;
-    free(q);
-  }
+  head -> next = List_delete(head -> next, index);
   
   return head;
-}
+ }
 
 
 /**
@@ -328,30 +327,23 @@ Node * List_merge(Node * head1, Node * head2)
 }
 
 #ifdef MYTEST
+// gcc -g answer02.c -DMYTEST && ./a.out
 int main(int argc, char * * argv)
 {
   {  
     int values[] = {1, 2, 3, 5, 6, 7};
     int index[] = {1, 2, 3, 5, 6, 7};
+    //Node * copied;
     Node *head = List_build(values,index,sizeof(values)/sizeof(int));
-    printf("\n=====List======\n");
-    List_print(stdout,head);
-    printf("\n========Trying to insert in the begining========\n");
-    printf("========You should see a 0: 1000========\n");
-    head = List_insert_ascend(head,1000,0);
-    List_print(stdout,head);
-    printf("\n========Trying to insert in the middle========\n"); 
-    printf("========You should see a 4: 4========\n");
-    head = List_insert_ascend(head,4,4);
-    List_print(stdout,head);
-    printf("\n========Trying to insert in the end========\n");
-    printf("========You should see a 9: 9========\n");
-    head = List_insert_ascend(head,9,9);
-    List_print(stdout,head);
-    printf("\n========Trying to insert something that will make the value of index 3 0========\n");
-    printf("========Index 3 should disappear ========\n");
-    head = List_insert_ascend(head,0,3);
-    List_print(stdout,head);
+    //head = List_delete(head, 1);
+    while (head != NULL)
+    {
+      printf("Index: %d Value: %d\n", head -> index, head -> value);
+      head = head -> next;
+    }
+      
+    //copied = List_copy(head);
+    //List_print(stdout, head);
   }
   return 0;
 }
