@@ -17,6 +17,17 @@ void List_print(FILE * out, Node * head)
     printf("\n");
 }
 
+void dump(Node * head)
+{
+  if(head == NULL)
+	printf("List is NULL\n");
+    while (head != NULL)
+    {
+      printf("[%p] Index: %d Value: %d ==> %p\n", head, head -> index, head -> value, head -> next);
+      head = head -> next;
+    }
+    printf("\n");
+}
 
 /**
  * Please fill in the code below
@@ -105,14 +116,14 @@ Node * List_build(int * value, int * index, int length)
   
   length_real = length - 1;
   
-  for (i = (length_real); i > 0; i--)
+  /* for (i = (length_real); i > 0; i--)
   {
     if(index[i -1] == index[i])
     {
       value[i - 1] = (value[i-1] + value[i]);
       value[i] = 0;
     }
-  }
+  } */
   
   while (j < length)
   {
@@ -123,11 +134,6 @@ Node * List_build(int * value, int * index, int length)
     j++;
   }
   
-  /*while (head != NULL)
-  {
-    printf("Index: %d  Value: %d\n", head -> index, head -> value);
-    head = head -> next;
-  } */
   
   return head;
 }
@@ -173,6 +179,8 @@ Node * List_insert_ascend(Node * head, int value, int index)
     new_insert -> next = head;
     return new_insert;
   }
+  
+  return 0;
 }
 
 
@@ -189,15 +197,15 @@ Node * List_insert_ascend(Node * head, int value, int index)
 Node * List_delete(Node * head, int index)
 { 
   Node * p;
-  
+
   if (head == NULL)
   {
+    
     return head;
-  }
+  } 
   
   if (head -> index == index)
   {
-    printf("Test\n");
     p = head -> next;
     free(head);
     return p;
@@ -206,8 +214,7 @@ Node * List_delete(Node * head, int index)
   head -> next = List_delete(head -> next, index);
   
   return head;
- }
-
+}
 
 /**
  * Copy a list
@@ -231,28 +238,33 @@ Node * List_copy(Node * head)
   Node * start = NULL;
   start = head;
   Node * copied = NULL;
+  start = head;
   
   int * value;
   int * index;
   int length = 0;
+  
   for (length = 0; start != NULL; length++)
+  {
     start = start -> next;
+  }
   
   value = malloc(sizeof(int) * length);
   index = malloc(sizeof(int) * length);
   int i = 0;
   
-  while (start != NULL)
+  while (head != NULL)
   {
-    value[i] = start -> value;
-    index[i] = start -> index;
-    start = start -> next;
+    value[i] = head -> value;
+    index[i] = head -> index;
+    head = head -> next;
     i++;
   }
   
   copied = List_build(value, index, length);
   free(index);
   free(value);
+  
   
   return copied;
 }
@@ -283,7 +295,7 @@ Node * merge_insert(Node * head1_copy,int value, int index)
 {
   if (head1_copy == NULL)
   {
-    return List_create(value, index);
+    return head1_copy;
   }
   
   if ((head1_copy -> index) == index)
@@ -291,23 +303,52 @@ Node * merge_insert(Node * head1_copy,int value, int index)
     head1_copy -> value += value;
   }
   
-  if ((head1_copy -> index) > index)
-  {
-    Node * p;
-    p = List_create(value, index);
-    p -> next = head1_copy;
-  }
-  
   head1_copy -> next = merge_insert(head1_copy -> next, value, index);
   
   return head1_copy;
 }
 
+Node * remove_zero(Node * head)
+{
+  Node * start = NULL;
+  start = head;
+  Node * no_zero = NULL;
+  start = head;
+  
+  int * value;
+  int * index;
+  int length = 0;
+  
+  for (length = 0; start != NULL; length++)
+  {
+    start = start -> next;
+  }
+  
+  value = malloc(sizeof(int) * length);
+  index = malloc(sizeof(int) * length);
+  int i = 0;
+  
+  while (head != NULL)
+  {
+    value[i] = head -> value;
+    index[i] = head -> index;
+    head = head -> next;
+    i++;
+  }
+  
+  no_zero = List_build(value, index, length);
+  free(index);
+  free(value);
+    
+  
+  return no_zero;
+}
 
 Node * List_merge(Node * head1, Node * head2)
 {
   Node * head1_copy = NULL;
   head1_copy = List_copy(head1);
+  Node * final_list;
   
   while(head2 != NULL)
   {
@@ -315,35 +356,56 @@ Node * List_merge(Node * head1, Node * head2)
     head2 = head2 -> next;
   }
   
-  while(head1_copy != NULL)
-  {
-    if ((head1_copy -> value) == 0)
-    {
-      head1_copy = List_delete(head1_copy, head1_copy -> index);
-    }
-  }
+  final_list = List_copy(head1_copy);
+ 
   
-  return head1_copy;
+  return final_list;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #ifdef MYTEST
 // gcc -g answer02.c -DMYTEST && ./a.out
 int main(int argc, char * * argv)
 {
   {  
-    int values[] = {1, 2, 3, 5, 6, 7};
-    int index[] = {1, 2, 3, 5, 6, 7};
-    //Node * copied;
+    int values[] = {1,0, 1,1,1,1};
+    int index[] = {1, 2, 3,4,5,6};
+    //int values2[] = {1, 2, 3};
+    //int index2[] = {5,6,7};
     Node *head = List_build(values,index,sizeof(values)/sizeof(int));
-    //head = List_delete(head, 1);
-    while (head != NULL)
+    //Node * head2 = List_build(values2,index2, sizeof(values2)/sizeof(int));
+    printf("\nInitial list:\n");
+    dump(head);
+    int count = 0;
+    printf("\nAbout to delete...\n");
+    
+    printf("\nIndex: %d Value: %d\n", head -> index, head -> value);
+    head = head -> next;
+    printf("\nIndex: %d Value: %d\n", head -> index, head -> value);
+    while (head != NULL);
     {
-      printf("Index: %d Value: %d\n", head -> index, head -> value);
+      if (head -> value == 0)
+      {
+      head = List_delete(head, head -> index);
+      dump(head);
+      }
       head = head -> next;
+      printf("\n%d\n", count++);
     }
-      
-    //copied = List_copy(head);
-    //List_print(stdout, head);
+    
   }
   return 0;
 }
