@@ -65,6 +65,7 @@ Node * List_create(int value, int index)
   nd -> next = NULL;
   nd -> value = value; 
   nd -> index = index;
+  
   return nd;
 }
 
@@ -116,7 +117,7 @@ Node * List_build(int * value, int * index, int length)
   {
     if (value[j] != 0)
     {
-      head = List_insert_ascend(head, index[j], value[j]);
+      head = List_insert_ascend(head, value[j], index[j]);
     }
 
     j++;
@@ -326,3 +327,32 @@ Node * List_merge(Node * head1, Node * head2)
   return head1_copy;
 }
 
+#ifdef MYTEST
+int main(int argc, char * * argv)
+{
+  {  
+    int values[] = {1, 2, 3, 5, 6, 7};
+    int index[] = {1, 2, 3, 5, 6, 7};
+    Node *head = List_build(values,index,sizeof(values)/sizeof(int));
+    printf("\n=====List======\n");
+    List_print(stdout,head);
+    printf("\n========Trying to insert in the begining========\n");
+    printf("========You should see a 0: 1000========\n");
+    head = List_insert_ascend(head,1000,0);
+    List_print(stdout,head);
+    printf("\n========Trying to insert in the middle========\n"); 
+    printf("========You should see a 4: 4========\n");
+    head = List_insert_ascend(head,4,4);
+    List_print(stdout,head);
+    printf("\n========Trying to insert in the end========\n");
+    printf("========You should see a 9: 9========\n");
+    head = List_insert_ascend(head,9,9);
+    List_print(stdout,head);
+    printf("\n========Trying to insert something that will make the value of index 3 0========\n");
+    printf("========Index 3 should disappear ========\n");
+    head = List_insert_ascend(head,0,3);
+    List_print(stdout,head);
+  }
+  return 0;
+}
+#endif

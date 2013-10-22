@@ -166,8 +166,6 @@ Node * List_insert_ascend(Node * head, int value, int index)
     new_insert -> next = head;
     return new_insert;
   }
-  
-  return 0;
 }
 
 
