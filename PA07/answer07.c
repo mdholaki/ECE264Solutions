@@ -35,7 +35,7 @@ void List_print(FILE * out, Node * head)
  */
 void List_destroy(Node * head)
 {
-  if (fr == NULL)
+  if (head == NULL)
   {
     return;
   }
@@ -118,6 +118,7 @@ Node * List_build(int * value, int * index, int length)
     {
       head = List_insert_ascend(head, index[j], value[j]);
     }
+
     j++;
   }
   
@@ -163,7 +164,7 @@ Node * List_insert_ascend(Node * head, int value, int index)
   if ((head -> index) > (new_insert -> index))
   {
     new_insert -> next = head;
-    return new_insert
+    return new_insert;
   }
 }
 
@@ -180,19 +181,33 @@ Node * List_insert_ascend(Node * head, int value, int index)
  */
 Node * List_delete(Node * head, int index)
 {
-  Node * New_delete;
   Node * p;
   p = head;
+  
+  if (p == NULL)
+  {
+    return p;
+  }
+  
+  
   Node * q;
   q = p -> next;
-  
     
-    
+  while ((q != NULL) && ((q -> index) != index))
+  {
+    p = p -> next;
+    q = q -> next;
+  }
   
+  if (q != NULL)
+  {
+    p -> next = q -> next;
+    free(q);
+  }
   
-  
-  
+  return head;
 }
+
 
 /**
  * Copy a list
@@ -213,7 +228,33 @@ Node * List_delete(Node * head, int index)
  */
 Node * List_copy(Node * head)
 {
-    return NULL;
+  Node * start = NULL;
+  start = head;
+  Node * copied = NULL;
+  
+  int * value;
+  int * index;
+  int length = 0;
+  for (length = 0; start != NULL; length++)
+    start = start -> next;
+  
+  value = malloc(sizeof(int) * length);
+  index = malloc(sizeof(int) * length);
+  int i = 0;
+  
+  while (start != NULL)
+  {
+    value[i] = start -> value;
+    index[i] = start -> index;
+    start = start -> next;
+    i++;
+  }
+  
+  copied = List_build(value, index, length);
+  free(index);
+  free(value);
+  
+  return copied;
 }
 
 
@@ -233,12 +274,55 @@ Node * List_copy(Node * head)
  *
  * Please refer to the README file for detailed instructions on how to
  * merge two lists.
- *
+ *s may only
  * This function should not modify either "head1" or "head2". You only
  * need to make a clone of "head1".
  */
+
+Node * merge_insert(Node * head1_copy,int value, int index)
+{
+  if (head1_copy == NULL)
+  {
+    return List_create(value, index);
+  }
+  
+  if ((head1_copy -> index) == index)
+  {
+    head1_copy -> value += value;
+  }
+  
+  if ((head1_copy -> index) > index)
+  {
+    Node * p;
+    p = List_create(value, index);
+    p -> next = head1_copy;
+  }
+  
+  head1_copy -> next = merge_insert(head1_copy -> next, value, index);
+  
+  return head1_copy;
+}
+
+
 Node * List_merge(Node * head1, Node * head2)
 {
-    return NULL;
+  Node * head1_copy = NULL;
+  head1_copy = List_copy(head1);
+  
+  while(head2 != NULL)
+  {
+    head1_copy = merge_insert(head1_copy, head2 -> value, head2 -> index);
+    head2 = head2 -> next;
+  }
+  
+  while(head1_copy != NULL)
+  {
+    if ((head1_copy -> value) == 0)
+    {
+      head1_copy = List_delete(head1_copy, head1_copy -> index);
+    }
+  }
+  
+  return head1_copy;
 }
 
