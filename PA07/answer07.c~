@@ -27,7 +27,7 @@ void dump(Node * head)
       head = head -> next;
     }
     printf("\n");
-}
+} 
 
 /**
  * Please fill in the code below
@@ -46,12 +46,11 @@ void dump(Node * head)
  */
 void List_destroy(Node * head)
 {
-  if (head == NULL)
+  if (head != NULL)
   {
-    return;
+    List_destroy(head -> next);
+    free(head);
   }
-  List_destroy(head -> next);
-  free(head);
   
   return;
 
@@ -72,11 +71,11 @@ void List_destroy(Node * head)
  */
 Node * List_create(int value, int index)
 {
-  Node * nd = malloc(sizeof(Node));
-  nd -> next = NULL;
+  Node * nd;
+  nd =  malloc(sizeof(Node));
   nd -> value = value; 
   nd -> index = index;
-  
+  nd -> next = NULL;
   return nd;
 }
 
@@ -110,21 +109,8 @@ Node * List_create(int value, int index)
 Node * List_build(int * value, int * index, int length)
 {
   Node * head = NULL;
-  int i = 0;
   int j = 0;
-  int length_real = 0;
-  
-  length_real = length - 1;
-  
-  for (i = (length_real); i > 0; i--)
-  {
-    if(index[i -1] == index[i])
-    {
-      value[i - 1] = (value[i-1] + value[i]);
-      value[i] = 0;
-    }
-  }
-  
+   
   while (j < length)
   {
     if (value[j] != 0)
@@ -133,7 +119,6 @@ Node * List_build(int * value, int * index, int length)
     }
     j++;
   }
-  
   
   return head;
 }
@@ -160,27 +145,32 @@ Node * List_build(int * value, int * index, int length)
  */
 Node * List_insert_ascend(Node * head, int value, int index)
 {
-  Node * new_insert;
-  new_insert = List_create(value, index);
-  
+ 
   if (head == NULL)
   {
-    return new_insert;
+    return List_create(value, index);
   }
   
-  if (head -> index < new_insert -> index)
+  if (head -> index < index)
   {
     head -> next = List_insert_ascend(head -> next, value, index);
     return head;
   }
   
-  if ((head -> index) > (new_insert -> index))
+  if((head -> index) == index)
   {
+    head -> value += value;
+    return head;
+  }
+  
+  if ((head -> index) >  index)
+  {
+    Node * new_insert = List_create(value, index);
     new_insert -> next = head;
     return new_insert;
   }
   
-  return 0;
+  return head;
 }
 
 
@@ -196,23 +186,19 @@ Node * List_insert_ascend(Node * head, int value, int index)
  */
 Node * List_delete(Node * head, int index)
 { 
-  Node * p;
-
   if (head == NULL)
   {
-    
-    return head;
+    return NULL;
   } 
   
   if (head -> index == index)
   {
-    p = head -> next;
+    Node * p = head -> next;
     free(head);
     return p;
   }
   
   head -> next = List_delete(head -> next, index);
-  
   return head;
 }
 
@@ -235,7 +221,7 @@ Node * List_delete(Node * head, int index)
  */
 Node * List_copy(Node * head)
 {
-  Node * start = NULL;
+  /* Node * start = NULL;
   start = head;
   Node * copied = NULL;
   start = head;
@@ -263,8 +249,15 @@ Node * List_copy(Node * head)
   
   copied = List_build(value, index, length);
   free(index);
-  free(value);
-  
+  free(value); */
+  if (head == NULL)
+  {
+    return NULL;
+  }
+  Node * copied = malloc(sizeof(Node));
+  copied -> index = head -> index;
+  copied -> value = head -> value;
+  copied -> next = List_copy(head -> next);
   
   return copied;
 }
@@ -291,75 +284,32 @@ Node * List_copy(Node * head)
  * need to make a clone of "head1".
  */
 
-Node * merge_insert(Node * head1_copy,int value, int index)
-{
-  if (head1_copy == NULL)
-  {
-    return head1_copy;
-  }
-  
-  if ((head1_copy -> index) == index)
-  {
-    head1_copy -> value += value;
-  }
-  
-  head1_copy -> next = merge_insert(head1_copy -> next, value, index);
-  
-  return head1_copy;
-}
-
-Node * remove_zero(Node * head)
-{
-  Node * start = NULL;
-  start = head;
-  Node * no_zero = NULL;
-  start = head;
-  
-  int * value;
-  int * index;
-  int length = 0;
-  
-  for (length = 0; start != NULL; length++)
-  {
-    start = start -> next;
-  }
-  
-  value = malloc(sizeof(int) * length);
-  index = malloc(sizeof(int) * length);
-  int i = 0;
-  
-  while (head != NULL)
-  {
-    value[i] = head -> value;
-    index[i] = head -> index;
-    head = head -> next;
-    i++;
-  }
-  
-  no_zero = List_build(value, index, length);
-  free(index);
-  free(value);
-    
-  
-  return no_zero;
-}
 
 Node * List_merge(Node * head1, Node * head2)
 {
-  Node * head1_copy = NULL;
-  head1_copy = List_copy(head1);
-  Node * final_list;
-  
-  while(head2 != NULL)
+  /*if(head1 == NULL)
   {
-    head1_copy = merge_insert(head1_copy, head2 -> value, head2 -> index);
-    head2 = head2 -> next;
+    return head2;
   }
   
-  final_list = List_copy(head1_copy);
- 
+  if(head2 == NULL)
+  {
+    return head1;
+  } */
   
-  return final_list;
+  Node * head1_copy = List_copy(head1);
+    
+  while(head2 != NULL)
+  {
+    head1_copy = List_insert_ascend(head1_copy, head2 -> value, head2 -> index);
+    head2 = head2 -> next;
+    if ((head1_copy -> value) == 0)
+    {
+      head1_copy = List_delete(head1_copy, head1_copy -> index);
+    } 
+  }
+  
+  return head1_copy;
 }
 
 
@@ -377,36 +327,31 @@ Node * List_merge(Node * head1, Node * head2)
 
 
 #ifdef MYTEST
-// gcc -g answer02.c -DMYTEST && ./a.out
+// gcc -g answer07.c -DMYTEST && ./a.out
 int main(int argc, char * * argv)
 {
   {  
-    int values[] = {1,0, 1,1,1,1};
-    int index[] = {1, 2, 3,4,5,6};
-    //int values2[] = {1, 2, 3};
-    //int index2[] = {5,6,7};
+    int values[] = {1, 1, 1};
+    int index[] = {1, 2, 3};
+    int values2[] = {1, 1, 1};
+    int index2[] = {4,5,6};
     Node *head = List_build(values,index,sizeof(values)/sizeof(int));
     //Node * head2 = List_build(values2,index2, sizeof(values2)/sizeof(int));
-    printf("\nInitial list:\n");
     dump(head);
-    int count = 0;
-    printf("\nAbout to delete...\n");
+    head = List_delete(head, 1);
+    dump(head);
+    /*printf("\nInitial list:\n");
+    dump(head);
+    printf("\nList 2\n");
+    dump(head);
     
-    printf("\nIndex: %d Value: %d\n", head -> index, head -> value);
-    head = head -> next;
-    printf("\nIndex: %d Value: %d\n", head -> index, head -> value);
-    while (head != NULL);
-    {
-      if (head -> value == 0)
-      {
-      head = List_delete(head, head -> index);
-      dump(head);
-      }
-      head = head -> next;
-      printf("\n%d\n", count++);
-    }
+    printf("\nMerging...\n");
+    
+    head = List_merge(head, head2);
+    dump(head); */
+     
     
   }
   return 0;
-}
-#endif
+} 
+#endif 
