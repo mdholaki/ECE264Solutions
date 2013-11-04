@@ -1,7 +1,8 @@
 #include "pa08.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+SparseNode * SparseArray_mergecall(SparseNode * array1_copy, SparseNode  * array_2);
+SparseNode * SparseArray_mergeinsert(SparseNode * array1, int  index, int value);
 /* 
  * Create a single instance of a sparse array tree node with a specific
  * index and value. This Sparse array will be implemented by a binary tree.
@@ -18,7 +19,7 @@
  * subtree pointers to NULL. 
  */
 
-SparseNode *SparseNode_create(int index, int value)
+SparseNode * SparseNode_create(int index, int value)
 {
   SparseNode * n = malloc(sizeof(SparseNode));
   n -> left = NULL;
@@ -341,16 +342,70 @@ SparseNode * SparseArray_copy(SparseNode * array)
  * Hint: you may write new functions
  */
 
-SparseNode * SparseArray_merge(SparseNode * array_1, SparseNode * array_2)
+SparseNode * SparseArray_mergecall(SparseNode * array1_copy, SparseNode  * array_2)
 {
-  return NULL;
-
+  if (array_2 == NULL)
+    return array1_copy;
+  
+  array1_copy = SparseArray_mergecall(array1_copy, array_2 -> left);
+  array1_copy = SparseArray_mergecall(array1_copy, array_2 -> right);
+  array1_copy = SparseArray_mergeinsert(array1_copy, array_2 -> index, array_2 -> value);
 }
 
 
+SparseNode * SparseArray_merge(SparseNode * array_1, SparseNode * array_2)
+{
+  SparseNode * array1_copy = SparseArray_copy(array_1);
+  
+  array1_copy = SparseArray_mergecall(array1_copy, array_2);
+  
+  return NULL;
+}
+
+SparseNode * SparseArray_mergeinsert(SparseNode * array1, int  index, int value)
+{
+  int newvalue = 0;
+  
+  if(array1 == NULL)
+  {
+    return SparseNode_create(index, value);
+  }
+  
+  if (array1 -> index > index)
+  {
+    array1 -> left = SparseArray_mergeinsert(array1 -> left, index, value);
+    return array1;
+  }
+  
+  if (array1 -> index < index)
+  {
+    array1 -> right = SparseArray_mergeinsert(array1 -> right, index, value);
+  }
+  
+  
+  if (array1 -> index == index)
+  {
+    newvalue = array1 -> value + value;
+    array1 -> value = newvalue;
+    if(newvalue == 0)
+    {
+      array1 = SparseArray_remove(array1, index);
+    }
+    
+    return array1;
+  }
+  
+  return 0;
+}
+  
+  
+   
+    
 
 
-void dump(SparseNode * head)
+
+
+/*void dump(SparseNode * head)
 {
   if(head == NULL)
 	printf("List is NULL\n");
@@ -377,7 +432,7 @@ int main(int argc, char * * argv)
     //Node * head2 = List_build(values2,index2, sizeof(values2)/sizeof(int));
     dump(head);
     
-    /*printf("\nInitial list:\n");
+    printf("\nInitial list:\n");
     dump(head);
     printf("\nList 2\n");
     dump(head);
@@ -385,10 +440,10 @@ int main(int argc, char * * argv)
     printf("\nMerging...\n");
     
     head = List_merge(head, head2);
-    dump(head); */
+    dump(head); 
      
     
   }
   return 0;
 } 
-#endif 
+#endif */
