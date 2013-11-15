@@ -68,7 +68,7 @@ while (tree not done yet)
 
 /* GDB AND SUCH 
 gdb pa09 
-r inputs/ch_header_inputs/testcase(number)_ch ouput
+r inputs/ch_header_inputs/testcase1_ch ouput
 where
 
 Valgind 

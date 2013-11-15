@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "pa09.c"
+#include <string.h>
+#include "pa09.h"
 
 int main ( int argc , char ** argv )
 {
   //check arguments
   if (argc != 3)
     {
-      printf("usage: ./pa04 <input file> <output file>\n");
+      printf("usage: ./pa09 <input file> <output file>\n");
       return EXIT_FAILURE;
     }
   
@@ -21,15 +22,25 @@ int main ( int argc , char ** argv )
     }
   
   HuffNode * root = NULL;
-  root = HuffbuildTree(fptr);
+    
+  if(strstr(argv[1], "ch") != NULL)
+  {
+    root = HuffBuildTree(fptr); //build char tree 
+  }
+  else
+  {
+      root = HuffConvertBit2Byte(fptr);//build bit tree
+  }
+  
+    
   
   fclose(fptr);
   
-  File * NewOutput = NULL;
+  FILE * NewOutput = NULL;
   NewOutput = fopen(argv[2], "w");
   
   
-  newPostOrderPrint(root, NewOutput);
+  HuffPostOrderPrint(root, NewOutput);
   
   HuffDestroy(root);
   
@@ -37,7 +48,7 @@ int main ( int argc , char ** argv )
   fclose(NewOutput);
   
   return EXIT_SUCCESS;
-  
+}
   
     
   

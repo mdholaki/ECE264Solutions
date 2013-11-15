@@ -1,5 +1,7 @@
 #ifndef PA09_H
 #define PA09_H
+#include <stdio.h>
+#include <string.h>
 
 typedef struct _huffnode {
     int value; 
@@ -12,13 +14,16 @@ typedef struct _stack {
     HuffNode * node;
 } Stack;
 
-HuffNode * HuffBuildTree(FILE * fptr);
 Stack * StackPush(Stack * st, HuffNode * Node);
 Stack * Stackpop(Stack * st);
 HuffNode * HuffNode_create(int);
-void Huffdestroy(HuffNode * node);
-
-
+void HuffDestroy(HuffNode * node);
+HuffNode * HuffBuildTree(FILE * fptr);
+void HuffPostOrderPrint(HuffNode * node, FILE * fptr);
+HuffNode * HuffConvertBit2Byte(FILE * fptr);
 
 #endif
+
+
+
 
