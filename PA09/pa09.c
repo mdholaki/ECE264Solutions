@@ -21,7 +21,7 @@ int main ( int argc , char ** argv )
     }
   
   HuffNode * root = NULL;
-  root = HuffbuildTree(fptr);
+  root = HuffBuildTree(fptr);
   
   fclose(fptr);
   
