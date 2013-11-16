@@ -20,10 +20,9 @@ HuffNode * HuffNode_create(int);
 void HuffDestroy(HuffNode * node);
 HuffNode * HuffBuildTree(FILE * fptr);
 void HuffPostOrderPrint(HuffNode * node, FILE * fptr);
-HuffNode * HuffConvertBit2Byte(FILE * fptr);
+HuffNode * HuffBuildBit(FILE * fptr);
 
 #endif
-
 
 
 

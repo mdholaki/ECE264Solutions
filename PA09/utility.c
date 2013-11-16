@@ -110,72 +110,67 @@ void HuffPostOrderPrint(HuffNode * node, FILE * fptr)
 }
 
 
-HuffNode * HuffConvertBit2Byte(FILE * fptr)
+HuffNode * HuffBuildBit(FILE * fptr)
 {
-  unsigned char masks[] = {0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01};
-  int commandLocation = 0;
+  unsigned char ch = fgetc(fptr);
+  int cmd_loc = 1;
+  int count = 0;
+  unsigned char masks[] = {0x80, 0x40, 0x20,0x10,0x08,0x04,0x02,0x01};
+  unsigned char command = 0; 
   Stack * st = NULL;
-  unsigned char command;
-  unsigned char command2;
-  int done = 0;
-  HuffNode * first = NULL;
-  HuffNode * second = NULL;
-  int i;
-  command = fgetc(fptr);
-  while(done != 1)
+  unsigned char next;
+  unsigned char value; 
+  unsigned char next_temp;
+  while (1)
+  {
+    command = (ch & masks[count]);
+    if (command != 0)
     {
-      if((masks[commandLocation] & command) == masks[commandLocation])
-        {
-         command2 = fgetc(fptr);
-         command <<= (commandLocation + 1);
-         for(i = 0; i < (commandLocation + 1); i++)
-         {
-         if((masks[i] & command2) == masks[i])
-                {
-                 command = command | masks[(7 - commandLocation) + i];
-                }
-         }
-         commandLocation += 8;
-         if(commandLocation == 15)
-         {
-         command2 = fgetc(fptr);
-         commandLocation = 0;
-         }
-         else
-         {
-         commandLocation -= 7;
-         }
-         HuffNode * newNode = HuffNode_create(command);
-         st = StackPush(st, newNode);
-         command = command2;
-        }
-      else if((masks[commandLocation] & command) != masks[commandLocation])
-        {
-         commandLocation++;
-         if(commandLocation == 8)
-         {
-         commandLocation = 0;
-         command = fgetc(fptr);
-         }
-         first = st -> node;
-         st = StackPop(st);
-         if(st == NULL)
-         {
-         done = 1;
-         }
-         else
-         {
-         second = st -> node;
-         st = StackPop(st);
-         HuffNode * newNode = malloc(sizeof(HuffNode));
-         newNode -> value = 9001;
-         newNode -> right = first;
-         newNode -> left = second;
-         st = StackPush(st, newNode);
-         }
-        }
+      next = fgetc(fptr);
+      value = ch << cmd_loc;
+      next_temp = next >> (8 - cmd_loc);
+      value = value | next_temp;
+      HuffNode * TreeNode = HuffNode_create(value);
+      st = StackPush(st, TreeNode);
+      ch = next;
     }
-  return first;
+    else
+    {
+      HuffNode * A = st -> node;
+      st = StackPop(st);
+      if (st == NULL)
+      {
+	return A;
+      }
+      
+      else
+      {
+	HuffNode * B = st -> node;
+	st = StackPop(st);
+	HuffNode * parent = malloc(sizeof(HuffNode));
+	parent -> value = ' ';
+	parent -> right = A;
+	parent -> left = B;
+	st = StackPush(st,parent);
+      }
+    }
+    
+    if (cmd_loc == 8)
+    {
+      ch = fgetc(fptr);
+      count = 0;
+      cmd_loc = 1;
+    }
+    else
+    {
+      cmd_loc++;
+      count++;
+    }
+  }
+  return NULL;  
+      
+    
+    
 }
 
 

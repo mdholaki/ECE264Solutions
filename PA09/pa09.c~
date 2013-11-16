@@ -29,7 +29,7 @@ int main ( int argc , char ** argv )
   }
   else
   {
-      root = HuffConvertBit2Byte(fptr);//build bit tree
+      root = HuffBuildBit(fptr);//build bit tree
   }
   
     
@@ -44,7 +44,6 @@ int main ( int argc , char ** argv )
   
   HuffDestroy(root);
   
-  fclose(fptr);
   fclose(NewOutput);
   
   return EXIT_SUCCESS;
