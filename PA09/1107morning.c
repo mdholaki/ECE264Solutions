@@ -70,27 +70,6 @@ while (not the end of the tree)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* write a conversion function */
 int convert(int by, int loc)
 {
@@ -124,4 +103,3 @@ int convert(int by, int loc)
     }
   move the command location forward by one
   
-

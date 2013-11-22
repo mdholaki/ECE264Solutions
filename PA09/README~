@@ -27,8 +27,8 @@ up to you to define all functions.  In the directory PA09, there will be differe
 
 Here are some details for this program:
   In pa09.c you will need to do:
-    1. Check argc, print error message if the number of arguments are not correct //
-    2. Open the input file, check if the file has been opened correctly, if not, print error message;//
+    1. Check argc, print error message if the number of arguments are not correct
+    2. Open the input file, check if the file has been opened correctly, if not, print error message;
     3. Call a function to create Huffman Tree, return the head of the tree;
     4. Open an output file, use your own modified function postOrderPrint to print the traverse of the tree 
   
